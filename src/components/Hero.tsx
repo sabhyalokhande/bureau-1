@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section id="home" className="relative flex min-h-screen items-center overflow-hidden">
+    <section id="home" className="relative flex min-h-screen items-center overflow-hidden bg-primary-deep">
       <img
         src={heroImg}
         alt="1-Bureau consultants collaborating in a Singapore office"
