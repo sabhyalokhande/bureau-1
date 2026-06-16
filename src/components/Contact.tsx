@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { sendContactEmail } from "@/lib/api/contact.functions";
 
 const details = [
   {
@@ -19,6 +21,30 @@ const details = [
 ];
 
 export function Contact() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+
+    setStatus("sending");
+    try {
+      await sendContactEmail({
+        data: {
+          name: fd.get("name") as string,
+          email: fd.get("email") as string,
+          subject: fd.get("subject") as string,
+          message: fd.get("message") as string,
+        },
+      });
+      setStatus("sent");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <section id="contact" className="bg-background py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
@@ -53,18 +79,20 @@ export function Contact() {
           </div>
 
           <form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
             className="bg-primary p-8 text-primary-foreground sm:p-12"
           >
             <h3 className="text-xl font-semibold">Send us a message</h3>
             <div className="mt-6 space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <input
+                  name="name"
                   required
                   placeholder="Your name"
                   className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/60 outline-none focus:border-accent"
                 />
                 <input
+                  name="email"
                   type="email"
                   required
                   placeholder="Email address"
@@ -72,17 +100,33 @@ export function Contact() {
                 />
               </div>
               <input
+                name="subject"
                 placeholder="Subject"
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/60 outline-none focus:border-accent"
               />
               <textarea
+                name="message"
                 rows={4}
                 required
                 placeholder="How can we help?"
                 className="w-full resize-none rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/60 outline-none focus:border-accent"
               />
-              <Button type="submit" variant="hero" size="lg" className="w-full">
-                Send Message
+
+              {status === "sent" && (
+                <p className="text-sm text-accent">Message sent! We'll be in touch soon.</p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-red-400">Something went wrong. Please try again or call us directly.</p>
+              )}
+
+              <Button
+                type="submit"
+                variant="hero"
+                size="lg"
+                className="w-full"
+                disabled={status === "sending" || status === "sent"}
+              >
+                {status === "sending" ? "Sending…" : status === "sent" ? "Sent!" : "Send Message"}
               </Button>
             </div>
           </form>
