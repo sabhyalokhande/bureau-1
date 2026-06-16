@@ -9,18 +9,24 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "1-Bureau | Accounting, Tax & Corporate Services Singapore" },
+      { title: "1-Bureau Private Limited | Accounting & Corporate Services Singapore" },
       {
         name: "description",
         content:
           "1-Bureau Private Limited provides professional accounting, corporate secretarial, taxation and payroll services for SMEs in Singapore since 2007.",
       },
-      { property: "og:title", content: "1-Bureau Private Limited | Professional Consulting" },
+      { property: "og:title", content: "1-Bureau Private Limited | Accounting & Corporate Services Singapore" },
       {
         property: "og:description",
         content:
-          "Accounting, taxation, payroll and corporate secretarial services for small & medium businesses in Singapore.",
+          "Professional accounting, taxation, payroll and corporate secretarial services for SMEs in Singapore since 2007.",
       },
+      { property: "og:url", content: "https://1-bureau.com" },
+      { property: "og:image", content: "https://1-bureau.com/icon-512.png" },
+      { name: "twitter:image", content: "https://1-bureau.com/icon-512.png" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://1-bureau.com" },
     ],
   }),
   component: Index,

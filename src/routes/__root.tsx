@@ -77,24 +77,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Orange Blue Web Design creates a visually appealing website using orange and blue, mirroring brochure content and incorporating a transparent PNG logo." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Orange Blue Web Design creates a visually appealing website using orange and blue, mirroring brochure content and incorporating a transparent PNG logo." },
+      { title: "1-Bureau Private Limited | Accounting & Corporate Services Singapore" },
+      { name: "description", content: "Professional accounting, taxation, payroll and corporate secretarial services for SMEs in Singapore since 2007. Located at North Bridge Centre." },
+      { name: "author", content: "1-Bureau Private Limited" },
+      { name: "apple-mobile-web-app-title", content: "1-Bureau" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { property: "og:title", content: "1-Bureau Private Limited | Accounting & Corporate Services Singapore" },
+      { property: "og:description", content: "Professional accounting, taxation, payroll and corporate secretarial services for SMEs in Singapore since 2007." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://1-bureau.com" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "Orange Blue Web Design creates a visually appealing website using orange and blue, mirroring brochure content and incorporating a transparent PNG logo." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1c8b0110-8534-4fda-92af-15e1346b699e/id-preview-6f00bde2--98190c7a-05b2-4d68-8359-7dd04f05fc37.lovable.app-1781265174345.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1c8b0110-8534-4fda-92af-15e1346b699e/id-preview-6f00bde2--98190c7a-05b2-4d68-8359-7dd04f05fc37.lovable.app-1781265174345.png" },
+      { name: "twitter:title", content: "1-Bureau Private Limited" },
+      { name: "twitter:description", content: "Professional accounting, taxation, payroll and corporate secretarial services for SMEs in Singapore since 2007." },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -109,11 +111,38 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  name: "1-Bureau Private Limited",
+  url: "https://1-bureau.com",
+  logo: "https://1-bureau.com/icon-512.png",
+  foundingDate: "2007",
+  description:
+    "Professional accounting, taxation, payroll and corporate secretarial services for SMEs in Singapore since 2007.",
+  telephone: "+6562643008",
+  openingHours: "Mo-Fr 09:00-18:00",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "420 North Bridge Road, #06-28, North Bridge Centre",
+    addressLocality: "Singapore",
+    postalCode: "188727",
+    addressCountry: "SG",
+  },
+  areaServed: { "@type": "Country", name: "Singapore" },
+  priceRange: "$$",
+  sameAs: ["https://1-bureau.com"],
+};
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         {children}
