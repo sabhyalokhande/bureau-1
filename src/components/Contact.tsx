@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 const details = [
   {
     label: "Address",
-    value: "200 Jalan Sultan, #03-11,\nTextile Centre, Singapore 199018",
+    value: "420 North Bridge Road, #06-28,\nNorth Bridge Centre, Singapore 188727",
     icon: <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0zM12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />,
   },
   {

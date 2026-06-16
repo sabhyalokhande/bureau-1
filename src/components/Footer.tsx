@@ -27,7 +27,7 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-widest text-accent">Contact</h4>
             <ul className="mt-5 space-y-3 text-sm text-primary-foreground/75">
-              <li>200 Jalan Sultan, #03-11,<br />Textile Centre, Singapore 199018</li>
+              <li>420 North Bridge Road, #06-28,<br />North Bridge Centre, Singapore 188727</li>
               <li>Tel: +(65) 6299 1567</li>
               <li>Mon – Fri, 9:00am – 6:00pm</li>
             </ul>
