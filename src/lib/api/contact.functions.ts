@@ -22,7 +22,7 @@ export const sendContactEmail = createServerFn({ method: "POST" })
       },
       body: JSON.stringify({
         from: "Website <noreply@1-bureau.com>",
-        to: ["info@1-bureau.com"],
+        to: ["admin@1-bureau.com"],
         reply_to: data.email,
         subject: data.subject ? `[Website] ${data.subject}` : `[Website] New message from ${data.name}`,
         html: `
